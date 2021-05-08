@@ -1,18 +1,70 @@
 # proxy-server
 
-In this repo I have created, to use cases of Proxy server [loadbalancer, reverse]. Both are written in Native Golang.
+In this repo I have created, to use cases of Proxy server [loadbalancer, reverse...]. Both are written in Native Golang.
 - Compression server
+- File server
 - Loadbalancer
 - Revese proxy
 - Cache service
 
 ## Understand Handle, Handler, and HandleFunc in Go
-In any programming language to implement a server, we need two important things: Port and routes.
-If you ever encountered the implementation of the HTTP server in golang, you must have faced the ListenAndServe() function. It accepts two parameters 1. Port with a colon like (:8023) and 2. An object of a user-defined type. Sometimes we pass nil as a second parameter and sometimes we pass some parameter why is that so, Any idea?
+In any programming language to implement a server, we need two important things: <b>Port and routes</b>.
+If you ever encountered the implementation of the HTTP server in Golang, you must have faced the ListenAndServe() function. It accepts two parameters 1. Port with a colon like (:8080) and 2. An object of a user-defined type. Sometimes we pass nil as a second parameter and sometimes we pass some parameter why is that so, Any idea?
 To know this concept we need to understand 3 terms
+- Interface
 - Handler
 - Handle
 - HandleFunc
+
+### Interface
+Interface is just to define the behavior of anything like I want to create a very simple mobile game where on-screen there are many items like bird, car, human, etc and on click of any item, you will get the sound of that item like bird mumbles, car horns, and human speaks so all item have common behavior that is everyone makes some sound so I create interface with one method.
+```go
+    interface voice {
+        sound();
+    }
+```
+Now we need to define all struct with the implementation of this interface.
+```go
+    // Bird Item
+    type bird struct {}
+    func (b *bird) sound() {
+    // Add media of bird voice
+    }
+    // Car Item
+    type car struct {}
+    func (c *car) sound() {
+    // Add media of car voice
+    }
+    // human Item
+    type human struct {}
+    func (h *human) sound() {
+    // Add media of human voice
+    }
+```
+Now it’s a piece of cake, we need to create an instance of the interface and assign an object of all struct which has implemented that interface.
+```go
+    // Create variable of interface
+    var v voice
+    v := bird object
+    v.sound() // Assigning bird object in interface variable
+    v := car object
+    v.sound() // Assigning car object in interface variable
+    v := human object
+    v.sound() // Assigning human object in interface variable
+```
+If you see here we have a variable of the interface and we are assigning objects of all struct that implement that interface. Now a question arises what is the use of this?
+
+Suppose in-game if anyone touches any item (like bird, car, human, etc) and if we create a method that gives an instance of a touched item.
+```go
+    func getTouchedItemObject() {
+    // Return instance of any touched object
+    }
+    v := getTouchedItemObject();
+    v.sound() // it will say sound of any touched thing in the game
+```
+Now after this code it’s a cup of tea to maintain the code if you want to add a new object in the game go for it, just create a struct of that object and define the method and boom getTouchedItemObject() will give the instance of the object and v.sound() will speak the language of the thing, no need to touch any existing code.
+
+### Handler
 
 ## What is a Proxy Server?
 Proxy means someone has the power or authority to do something for someone else or pretends to be someone else. Let us see this with a simple example, if you are living with Bob and currently he is not at home and you are alone and suppose the phone rang and you picked up the call and caller said, “Hi, this is Martin, may I speak to Bob”. As Bob was not at home so you pretended to be Bob and had a discussion with caller on behalf of Bob. So here, you are pretending to be Bob and the caller is not aware that he is not speaking to Bob.

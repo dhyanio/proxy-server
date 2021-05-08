@@ -1,6 +1,9 @@
 # proxy-server
 
 In this repo I have created, to use cases of Proxy server [loadbalancer, reverse]. Both are written in Native Golang.
+- Compression server
+- Loadbalancer
+- Revese proxy
 
 ## Understand Handle, Handler, and HandleFunc in Go
 In any programming language to implement a server, we need two important things: Port and routes.
